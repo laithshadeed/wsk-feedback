@@ -31,6 +31,93 @@
     <!-- Color the status bar on mobile devices -->
     <meta name="theme-color" content="#2F3BA2">
 
+    <!-- Material Design Lite page styles:
+    You can choose other color schemes from the CDN, more info here http://www.getmdl.io/customize/index.html
+    Format: material.color1-color2.min.css, some examples:
+    material.red-teal.min.css
+    material.blue-orange.min.css
+    material.purple-indigo.min.css
+    -->
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+
+    <!-- Material Design icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Your styles -->
+    <link rel="stylesheet" href="styles/main.css">
+
+  </head>
+  <body ng-controller="FeedbackController" class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+      <header class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">WSK Feedback Demo</span>
+          <div class="mdl-layout-spacer"></div>
+        </div>
+      </header>
+      <div class="demo-ribbon"></div>
+      <main class="demo-main mdl-layout__content">
+        <div class="demo-container mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+          <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+            <div class="mdl-card__actions mdl-card--border">
+              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                Average Rating: {{ data.averageRating }}
+              </a>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                Feedback count per rating
+              </a>
+            </div>
+            <div class="mdl-grid">
+              <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                <thead>
+                  <tr>
+                    <th>Rating</th>
+                    <th>Count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="(key, value) in data.countByRating">
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                Feedback list
+              </a>
+            </div>
+            <div class="mdl-grid">
+              <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                <thead>
+                  <tr>
+                    <th>Browser</th>
+                    <th>Platform</th>
+                    <th>City</th>
+                    <th>Rating</th>
+                    <th>Labels</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="feedback in data.feedbacks">
+                    <td>{{ feedback.browserName }} {{ feedback.browserVersion }}</td >
+                    <td>{{ feedback.platform }}</td>
+                    <td>{{ feedback.geo.city }}</td>
+                    <td>{{ feedback.rating }}</td>
+                    <td>{{ feedback.labels | json }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
@@ -43,18 +130,5 @@
     <!-- build:js(app/) ../../scripts/main.min.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
-  </head>
-  <body ng-controller="FeedbackController">
-    <h3>Count: {{ data.count }}</h3>
-    <h3>Average Rating: {{ data.averageRating }}</h3>
-    <h3>
-      <span>Feedback count per rating</span>
-      <ul>
-        <li ng-repeat="(key, value) in data.countByRating">{{ key }} : {{ value }}</li>
-      </ul>
-    </h3>
-    <ul>
-      <li ng-repeat="feedback in data.feedbacks">{{ feedback | json }}</li>
-    </ul>
   </body>
 </html>
