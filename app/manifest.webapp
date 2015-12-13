@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "name": "WSK Feedback Demo",
+  "launch_path": "/index.html",
+  "description": "Sample app using AngularJS, AngularFire, Firebase and Web Starter Kit.",
+  "icons": {
+    "128": "/images/touch/icon-128x128.png"
+  },
+  "developer": {
+    "name": "Laith Shadeed",
+    "url": "http://l3.io"
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "WSK Feedback Demo",
+      "description": "Sample app using AngularJS, AngularFire, Firebase and Web Starter Kit."
+    }
+  }
+}
