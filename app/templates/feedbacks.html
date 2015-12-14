@@ -1,0 +1,28 @@
+<div class="mdl-card__actions mdl-card--border">
+  <a href="#/feedbacks" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+    Feedback list
+  </a>
+</div>
+
+<div class="mdl-grid">
+  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+      <tr>
+        <th>Browser</th>
+        <th>Platform</th>
+        <th>City</th>
+        <th>Rating</th>
+        <th>Labels</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="feedback in feedbacks">
+        <td>{{ feedback.browserName }} {{ feedback.browserVersion }}</td >
+        <td>{{ feedback.platform }}</td>
+        <td>{{ feedback.geo.city }}</td>
+        <td>{{ feedback.rating }}</td>
+        <td>{{ feedback.labels | json }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

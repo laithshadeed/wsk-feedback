@@ -1,0 +1,21 @@
+<div class="mdl-card__actions mdl-card--border">
+  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+    Feedback count per rating
+  </a>
+</div>
+<div class="mdl-grid">
+  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+      <tr>
+        <th>Rating</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="(key, value) in ratingCount ">
+        <td>{{ key }}</td>
+        <td>{{ value }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
