@@ -3,12 +3,12 @@
 
 # TEAM
 
-  <name> -- <role> -- <twitter>
+  Laith Shadeed -- Software Engineer -- @laithshadeed
 
 # THANKS
 
-  <name>
+  To everyone invloved in open souce projects specially: WSK, Angular and Firebase guys.
 
 # TECHNOLOGY COLOPHON
 
-  HTML5, CSS3
+  HTML5, CSS3, Firebase, AngularJS, AngularFire
