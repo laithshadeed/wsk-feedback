@@ -31,6 +31,13 @@ gulp.task('lint', () =>
     .pipe($.if(!browserSync.active, $.eslint.failOnError()))
 );
 
+// Lint TypeScript
+gulp.task('tslint', () =>
+  gulp.src(['app/scripts/**/*.ts'])
+    .pipe($.tslint())
+    .pipe($.tslint.report('verbose'))
+);
+
 // Optimize images
 gulp.task('images', () =>
   gulp.src('app/images/**/*')
@@ -97,12 +104,21 @@ gulp.task('scripts', () =>
       './app/scripts/main.js',
       './app/scripts/controllers.js',
       './app/scripts/constants.js',
-      './app/scripts/services.js'
-      // Other scripts
+      './app/scripts/services.js',
+
+      // Angular2 Typescript
+      './app/scripts/hello-ng2-bootstrap.ts',
+      './app/scripts/hello-ng2.ts'
     ])
       .pipe($.newer('.tmp/scripts'))
       .pipe($.sourcemaps.init())
       .pipe($.babel())
+      .pipe($.typescript({
+        'target': 'ES5',
+        'module': 'system',
+        'moduleResolution': 'node',
+        'experimentalDecorators': true
+      }))
       .pipe($.sourcemaps.write())
       .pipe(gulp.dest('.tmp/scripts'))
       .pipe($.concat('main.min.js'))
@@ -157,7 +173,8 @@ gulp.task('serve', ['scripts', 'styles'], () => {
 
   gulp.watch(['app/**/*.html'], reload);
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
-  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts']);
+  gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts'], reload);
+  gulp.watch(['app/scripts/**/*.ts'], ['tslint', 'scripts'], reload);
   gulp.watch(['app/images/**/*'], reload);
 });
 
@@ -179,7 +196,7 @@ gulp.task('serve:dist', ['default'], () =>
 gulp.task('default', ['clean'], cb =>
   runSequence(
     'styles',
-    ['lint', 'html', 'scripts', 'images', 'copy'],
+    ['tslint', 'lint', 'html', 'scripts', 'images', 'copy'],
     cb
   )
 );
